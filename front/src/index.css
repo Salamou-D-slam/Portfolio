@@ -4,6 +4,10 @@
 /* Custom styles can be added here */
 body {
   background-color: #00064a;
-
   background-image: url("https://www.transparenttextures.com/patterns/axiom-pattern.png");
+}
+
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 2px white; /* bordure autour du texte */
 }
