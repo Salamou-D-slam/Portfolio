@@ -67,6 +67,40 @@ function AdminProfil({ onAdd }) {
           </form>
         </div>
       </section>
+
+      <section>
+        <div className="sectionApply text-white p-10">
+          <form onSubmit={handleSubmit}>
+            <h2 className="text-2xl font-bold mb-6">
+              Ajouter un nouveau projet dans la page projets
+            </h2>
+            <div className="mb-4">
+              <FormText
+                htmlFor="projetNom"
+                type="text"
+                id="projetNom"
+                name="projetNom"
+                value={inputText.projetNom}
+                onChange={handleChange}
+              >
+                Nom du projet
+              </FormText>
+
+              <FormTextrea
+                htmlFor="projetlDesc"
+                id="projetDesc"
+                name="projetDesc"
+                value={inputText.projetDesc}
+                onChange={handleChange}
+              >
+                Titre de la section
+              </FormTextrea>
+
+              <ButtonForm type="submit"> Ajouter la section</ButtonForm>
+            </div>
+          </form>
+        </div>
+      </section>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AdminProfil from "../components/AdminProfil.jsx";
+import AdminProfil from "../components/FormAdmin.jsx";
 import SectionProfil from "../components/SectionProfil.jsx";
 
 function Admin() {
