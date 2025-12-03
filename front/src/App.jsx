@@ -11,6 +11,9 @@ import ProfilAdmin from "./pages/ProfilAdmin.jsx";
 import ProjectsAdmin from "./pages/ProjectsAdmin.jsx";
 
 function App() {
+  const [profil, setProfil] = useState([]);
+  const [projects, setProjects] = useState([]);
+
   return (
     <Router>
       <div className="min-h-screen flex flex-col">
@@ -20,11 +23,22 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/projets" element={<Projects />} />
-            <Route path="/profil" element={<Profil />} />
+            <Route path="/profil" element={<Profil sections={profil} />} />
+            <Route path="/projets" element={<Projects sections={projects} />} />
             <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/profilform" element={<ProfilAdmin />} />
-            <Route path="/admin/projectform" element={<ProjectsAdmin />} />
+
+            <Route
+              path="/admin/profilform"
+              element={
+                <ProfilAdmin sections={profil} setSections={setProfil} />
+              }
+            />
+            <Route
+              path="/admin/projectform"
+              element={
+                <ProjectsAdmin sections={projects} setSections={setProjects} />
+              }
+            />
           </Routes>
         </main>
 

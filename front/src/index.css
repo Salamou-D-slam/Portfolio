@@ -18,7 +18,7 @@ body {
 }
 
 .sectionApply {
-  @apply container mx-auto mt-20 p-6 bg-black/50 rounded-lg outline-2 outline-offset-2 outline-blue-50 m-40 flex flex-col;
+  @apply container mx-auto mt-20 mb-20 p-6 bg-black/50 rounded-lg outline-2 outline-offset-2 outline-blue-50 flex flex-col;
 }
 .outlineApply {
   @apply outline-2 outline-offset-2 outline-blue-50;
@@ -31,6 +31,11 @@ body {
 .buttonDefault {
   @apply bg-blue-700 hover:bg-blue-700/90 text-white font-bold py-2 px-4 rounded mt-4;
 }
+
+.buttonLink {
+  @apply flex flex-wrap justify-center gap-6 mt-30;
+}
+
 /*-----------------------------HOME-------------------------------------------------------------*/
 .sectionHome {
   @apply container bg-black/50 w-350 h-150 max-sm:w-full max-sm:h-220 max-xl:h-250 max-lg:h-250 mx-auto mt-20 rounded-lg outline-2 outline-offset-2 outline-blue-50 m-40 p-9 flex flex-col max-sm:flex-col lg:flex-row  justify-between;
@@ -68,10 +73,6 @@ body {
   @apply w-full h-full object-cover rounded-full outline-4 outline-offset-4 outline-blue-50;
 }
 
-.buttonLink {
-  @apply flex flex-wrap justify-center gap-6 mt-30;
-}
-
 .btnHome {
   @apply text-white w-43 h-13 rounded-lg max-sm:mt-0  max-xl:w-70 max-sm:w-40 items-center flex justify-center hover:bg-blue-700/70 outline-2 outline-offset-2 outline-blue-50 opacity-50 hover:opacity-100 hover:scale-105 transition-all duration-300;
 }
@@ -96,5 +97,3 @@ body {
 .divSocials {
   @apply container bg-transparent hover:bg-indigo-800 opacity-50 hover:opacity-100 w-230 h-150  max-md:h-60 max-sm:h-100  max-md:-mt-80 p-6 flex flex-col items-center justify-center;
 }
-
-/*-----------------------------PROJECTS-------------------------------------------------------------*/

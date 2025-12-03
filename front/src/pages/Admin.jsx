@@ -4,8 +4,8 @@ import ButtonHome from "../components/ButtonLink.jsx";
 function Admin() {
   return (
     <>
-      <section className="sectionHome">
-        <div className="buttonLink">
+      <section className="sectionHome h-40! items-center justify-center!  ">
+        <div className="buttonLink mt-0! text-center">
           <ButtonHome to="/admin/profilform">
             Page de profil (Administrateur)
           </ButtonHome>

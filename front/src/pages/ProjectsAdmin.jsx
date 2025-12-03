@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import InputProject from "../components/InputProject.jsx";
 import TableProject from "../components/TableProject.jsx";
 
-function ProjectsAdmin() {
-  const [sections, setSections] = useState([]);
+function ProjectsAdmin({ sections, setSections }) {
+  //const [sections, setSections] = useState([]);
 
   function addSection(newSection) {
     setSections((prev) => [...prev, newSection]);
@@ -24,21 +24,24 @@ function ProjectsAdmin() {
                 <th scope="col">Bouton</th>
               </tr>
             </thead>
-            {sections.length > 0 ? (
-              sections.map((sectionItem, index) => (
-                <TableProject
-                  key={index}
-                  nomProjet={sectionItem.projetNom}
-                  LienProjet={sectionItem.projetLien}
-                  dateProjetDebut={sectionItem.projetDateDebut}
-                  dateProjetFin={sectionItem.projetDateFin}
-                />
-              ))
-            ) : (
-              <p className="text-white text-center">
-                Aucune section ajoutée pour le moment.
-              </p>
-            )}
+            <tbody className="text-center">
+              {sections.length > 0 ? (
+                sections.map((sectionItem, index) => (
+                  <TableProject
+                    key={index}
+                    nomProjet={sectionItem.projetNom}
+                    LienProjet={sectionItem.projetLien}
+                    projetLienNom={sectionItem.projetLienNom}
+                    dateProjetDebut={sectionItem.projetDateDebut}
+                    dateProjetFin={sectionItem.projetDateFin}
+                  />
+                ))
+              ) : (
+                <th className="text-white text-center">
+                  Aucune section ajoutée pour le moment.
+                </th>
+              )}
+            </tbody>
           </table>
         </div>
       </div>

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import InputProfil from "../components/InputProfil.jsx";
 import SectionProfil from "../components/SectionProfil.jsx";
 
-function ProfilAdmin() {
-  const [sections, setSections] = useState([]);
+function ProfilAdmin({ sections, setSections }) {
+  //const [sections, setSections] = useState([]);
 
   function addSection(newSection) {
     setSections((prev) => [...prev, newSection]);

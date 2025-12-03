@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import FormText from "./Form.jsx";
-import { FormTextrea, ButtonForm } from "./Form.jsx";
+import FormText, { ButtonForm } from "./Form.jsx";
 
 function InputProject({ onAdd }) {
   const [inputText, setInputText] = useState({
     projetNom: "",
     projetLien: "",
+    projetLienNom: "",
     projetDateDebut: "",
     projetDateFin: "",
   });
@@ -27,6 +27,7 @@ function InputProject({ onAdd }) {
     setInputText({
       projetNom: "",
       projetLien: "",
+      projetLienNom: "",
       projetDateDebut: "",
       projetDateFin: "",
     }); // reset form
@@ -64,6 +65,17 @@ function InputProject({ onAdd }) {
                 onChange={handleChange}
               >
                 Lien affilé au projet
+              </FormText>
+
+              <FormText
+                htmlFor="projetLienNom"
+                type="text"
+                id="projetLienNom"
+                name="projetLienNom"
+                value={inputText.projetLienNom}
+                onChange={handleChange}
+              >
+                Nom du lien
               </FormText>
 
               <FormText

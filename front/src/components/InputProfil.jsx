@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import FormText from "./Form.jsx";
-import { FormTextrea, ButtonForm } from "./Form.jsx";
+import FormText, { FormTextrea, ButtonForm } from "./Form.jsx";
 
 function InputProfil({ onAdd }) {
   const [inputText, setInputText] = useState({
