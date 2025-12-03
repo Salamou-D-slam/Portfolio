@@ -7,6 +7,8 @@ import Contact from "./pages/Contact.jsx";
 import Projects from "./pages/Projects.jsx";
 import Profil from "./pages/Profil.jsx";
 import Admin from "./pages/Admin.jsx";
+import ProfilAdmin from "./pages/ProfilAdmin.jsx";
+import ProjectsAdmin from "./pages/ProjectsAdmin.jsx";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
             <Route path="/projets" element={<Projects />} />
             <Route path="/profil" element={<Profil />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/profilform" element={<ProfilAdmin />} />
+            <Route path="/admin/projectform" element={<ProjectsAdmin />} />
           </Routes>
         </main>
 

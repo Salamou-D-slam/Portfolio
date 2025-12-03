@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonForm } from "../components/Form";
+import TableProject from "../components/TableProject.jsx";
 
 function Projects() {
   return (
@@ -11,7 +11,7 @@ function Projects() {
       </div>
 
       <div className="container mx-auto p-6  border-2">
-        <table className="text-white border-4 w-full">
+        <table className="text-white border-4 w-full h-30">
           <thead>
             <tr>
               <th scope="col">Nom du Projet</th>
@@ -21,18 +21,21 @@ function Projects() {
             </tr>
           </thead>
 
-          <tbody className=" text-center ">
-            <tr>
-              <td scope="row">Arcadia</td>
-              <td scope="row">tes</td>
-              <td scope="row">tes</td>
-              <td scope="row">
-                <a href="">
-                  <ButtonForm type="button">En savoir plus</ButtonForm>
-                </a>
-              </td>
-            </tr>
-          </tbody>
+          {sections.length > 0 ? (
+            sections.map((sectionItem, index) => (
+              <TableProject
+                key={index}
+                nomProjet={sectionItem.projetNom}
+                LienProjet={sectionItem.projetLien}
+                dateProjetDebut={sectionItem.projetDateDebut}
+                dateProjetFin={sectionItem.projetDateFin}
+              />
+            ))
+          ) : (
+            <p className="text-white text-center">
+              Aucune section ajoutée pour le moment.
+            </p>
+          )}
         </table>
       </div>
     </>
