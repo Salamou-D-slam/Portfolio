@@ -9,6 +9,10 @@ function ProjectsAdmin({ sections, setSections }) {
     setSections((prev) => [...prev, newSection]);
   }
 
+  function deleteProject(id) {
+    setSections((prev) => prev.filter((_, index) => index !== id));
+  }
+
   return (
     <div className="container mx-auto p-6">
       <InputProject onAdd={addSection} />
@@ -29,12 +33,14 @@ function ProjectsAdmin({ sections, setSections }) {
                 sections.map((sectionItem, index) => (
                   <TableProject
                     key={index}
+                    id={index}
                     nomProjet={sectionItem.projetNom}
                     LienProjet={sectionItem.projetLien}
                     projetLienNom={sectionItem.projetLienNom}
                     dateProjetDebut={sectionItem.projetDateDebut}
                     dateProjetFin={sectionItem.projetDateFin}
                     isAdmin={true}
+                    onDelete={deleteProject}
                   />
                 ))
               ) : (

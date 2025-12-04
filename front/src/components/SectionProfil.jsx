@@ -3,7 +3,6 @@ import { ButtonForm } from "../components/Form";
 
 function SectionProfil({ title, desc, isAdmin, onDelete, id }) {
   function handleClick() {
-    console.log("Supprimer id =", id);
     onDelete(id);
   }
   return (

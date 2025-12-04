@@ -8,7 +8,12 @@ function TableProject({
   dateProjetDebut,
   dateProjetFin,
   isAdmin,
+  onDelete,
+  id,
 }) {
+  function handleClick() {
+    onDelete(id);
+  }
   return (
     <>
       <tr>
@@ -28,9 +33,9 @@ function TableProject({
         </td>
         {isAdmin && (
           <td scope="row">
-            <a href="">
-              <ButtonForm type="button">Supprimer</ButtonForm>
-            </a>
+            <ButtonForm type="button" onClick={handleClick}>
+              Supprimer
+            </ButtonForm>
           </td>
         )}
       </tr>
