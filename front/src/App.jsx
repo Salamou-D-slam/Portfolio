@@ -33,14 +33,15 @@ function App() {
                 <ProjectsAdmin sections={projects} setSections={setProjects} />
               }
             />
+            <Route
+              path="/admin/profilform"
+              element={
+                <ProfilAdmin sections={profil} setSections={setProfil} />
+              }
+            />
             <Route path="/admin" element={<Admin />} />
 
-            <Route
-              path="/project/:nomProjet"
-              element={<ProjectDetail projects={projects} />}
-            />
-
-            <Route path="/projets/:nomProjet" element={<ProjectDetail />} />
+            <Route path="/project/:nomProjet" element={<ProjectDetail />} />
           </Routes>
         </main>
 
