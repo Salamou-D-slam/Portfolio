@@ -6,6 +6,7 @@ import Home from "./pages/Home.jsx";
 import Contact from "./pages/Contact.jsx";
 import Projects from "./pages/Projects.jsx";
 import Profil from "./pages/Profil.jsx";
+import Login from "./pages/Login.jsx";
 import Admin from "./pages/Admin.jsx";
 import ProfilAdmin from "./pages/ProfilAdmin.jsx";
 import ProjectsAdmin from "./pages/ProjectsAdmin.jsx";
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/profil" element={<Profil sections={profil} />} />
             <Route path="/projets" element={<Projects sections={projects} />} />
 
