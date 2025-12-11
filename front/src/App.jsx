@@ -29,6 +29,8 @@ function App() {
             <Route path="/profil" element={<Profil sections={profil} />} />
             <Route path="/projets" element={<Projects sections={projects} />} />
 
+            <Route path="/admin" element={<Admin />} />
+
             <Route
               path="/admin/projectform"
               element={
@@ -41,7 +43,6 @@ function App() {
                 <ProfilAdmin sections={profil} setSections={setProfil} />
               }
             />
-            <Route path="/admin" element={<Admin />} />
 
             <Route path="/project/:nomProjet" element={<ProjectDetail />} />
           </Routes>

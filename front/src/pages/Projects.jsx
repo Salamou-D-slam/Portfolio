@@ -20,6 +20,9 @@ function Projects({ sections }) {
                   Nom du Projet
                 </th>
                 <th scope="col" className="tableProject">
+                  Technologies principales
+                </th>
+                <th scope="col" className="tableProject">
                   Lien affilé au projet
                 </th>
                 <th scope="col" className="tableProject">
@@ -36,6 +39,7 @@ function Projects({ sections }) {
                   <TableProject
                     key={index}
                     nomProjet={sectionItem.projetNom}
+                    techno={sectionItem.techno}
                     LienProjet={sectionItem.projetLien}
                     projetLienNom={sectionItem.projetLienNom}
                     dateProjetDebut={sectionItem.projetDateDebut}

@@ -1,10 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import InputProject from "../components/InputProject.jsx";
 import TableProject from "../components/TableProject.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function ProjectsAdmin({ sections, setSections }) {
   //const [sections, setSections] = useState([]);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
 
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/admin/projectform", {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (res.status === 401) {
+          navigate("/login"); // pas connecté donc redirection
+        } else {
+          setAuthorized(true); // session valide
+        }
+      } catch (err) {
+        navigate("/login"); // erreur réseau donc redirection
+      } finally {
+        setLoading(false); // vérification terminée
+      }
+    };
+
+    checkSession();
+  }, [navigate]);
+
+  // Tant que la vérification n’est pas finie, rien ne s’affiche
+  if (loading)
+    return (
+      <div className="mt-20 flex justify-center">
+        <CircularProgress />
+      </div>
+    );
+  if (!authorized) return null;
   function addSection(newSection) {
     setSections((prev) => [...prev, newSection]);
   }
@@ -28,6 +64,7 @@ function ProjectsAdmin({ sections, setSections }) {
             <thead>
               <tr>
                 <th scope="col">Nom du Projet</th>
+                <th scope="col">Technologies principales</th>
                 <th scope="col">Lien affilé au projet</th>
                 <th scope="col">date du projet (Début-Fin)</th>
                 <th scope="col">Détail du projet</th>
@@ -41,6 +78,7 @@ function ProjectsAdmin({ sections, setSections }) {
                     key={index}
                     id={index}
                     nomProjet={sectionItem.projetNom}
+                    techno={sectionItem.techno}
                     LienProjet={sectionItem.projetLien}
                     projetLienNom={sectionItem.projetLienNom}
                     dateProjetDebut={sectionItem.projetDateDebut}

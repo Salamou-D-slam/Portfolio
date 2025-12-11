@@ -5,6 +5,7 @@ import { FormTextrea, ButtonForm } from "../components/Form.jsx";
 
 function TableProject({
   nomProjet,
+  techno,
   LienProjet,
   projetLienNom,
   dateProjetDebut,
@@ -23,6 +24,7 @@ function TableProject({
   const [isEditing, setIsEditing] = useState(false);
   const [tempDataProject, setTempDataProject] = useState({
     projetNom: nomProjet,
+    techno,
     projetLien: LienProjet,
     projetLienNom: projetLienNom,
     projetDateDebut: dateProjetDebut,
@@ -48,6 +50,7 @@ function TableProject({
   function handleCancel() {
     setTempDataProject({
       projetNom: nomProjet,
+      techno,
       projetLien: LienProjet,
       projetLienNom: projetLienNom,
       projetDateDebut: dateProjetDebut,
@@ -66,6 +69,7 @@ function TableProject({
       {!isEditing && (
         <tr>
           <td className="tableProject">{nomProjet}</td>
+          <td className="tableProject">{techno}</td>
           <td className="tableProject">
             <a href={LienProjet} target="_blank" rel="noreferrer">
               {projetLienNom}
@@ -80,6 +84,7 @@ function TableProject({
               state={{
                 projet: {
                   nomProjet,
+                  techno,
                   LienProjet,
                   projetLienNom,
                   dateProjetDebut,
@@ -158,6 +163,19 @@ function TableProject({
                   }
                 >
                   Nom du projet
+                </FormText>
+
+                <FormText
+                  type="text"
+                  value={tempDataProject.techno}
+                  onChange={(e) =>
+                    setTempDataProject({
+                      ...tempDataProject,
+                      techno: e.target.value,
+                    })
+                  }
+                >
+                  Technologies princpale
                 </FormText>
 
                 <FormText

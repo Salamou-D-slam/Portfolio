@@ -30,6 +30,7 @@ function InputProject({ onAdd }) {
 
     setInputText({
       projetNom: "",
+      techno: "",
       projetLien: "",
       projetLienNom: "",
       GHProjet: "",
@@ -63,6 +64,17 @@ function InputProject({ onAdd }) {
               >
                 Nom du projet
               </FormText>
+
+              <FormText
+                htmlFor="techno"
+                type="text"
+                id="techno"
+                name="techno"
+                value={inputText.techno}
+                onChange={handleChange}
+              >
+                Technologies princpale
+              </FormText>
               <FormText
                 htmlFor="projetLien"
                 type="text"
@@ -94,7 +106,7 @@ function InputProject({ onAdd }) {
                 GithHub
               </FormText>
 
-              <div className="bg-blue-900 w-120 p-4 flex flex-row gap-10">
+              <div className="bg-blue-900 w-120 p-4 flex flex-row gap-10 justify-center">
                 <div>
                   <FormText
                     htmlFor="projetDateDebut"
@@ -103,7 +115,6 @@ function InputProject({ onAdd }) {
                     name="projetDateDebut"
                     value={inputText.projetDateDebut}
                     onChange={handleChange}
-                    className="w-1000"
                   >
                     date de début du projet
                   </FormText>

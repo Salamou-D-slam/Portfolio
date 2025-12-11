@@ -1,9 +1,46 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import InputProfil from "../components/InputProfil.jsx";
 import SectionProfil from "../components/SectionProfil.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function ProfilAdmin({ sections, setSections }) {
   //const [sections, setSections] = useState([]);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+  const [authorized, setAuthorized] = useState(false);
+
+  useEffect(() => {
+    const checkSession = async () => {
+      try {
+        const res = await fetch("http://localhost:8000/admin/profilform", {
+          method: "GET",
+          credentials: "include",
+        });
+
+        if (res.status === 401) {
+          navigate("/login"); // pas connecté donc redirection
+        } else {
+          setAuthorized(true); // session valide
+        }
+      } catch (err) {
+        navigate("/login"); // erreur réseau donc redirection
+      } finally {
+        setLoading(false); // vérification terminée
+      }
+    };
+
+    checkSession();
+  }, [navigate]);
+
+  // Tant que la vérification n’est pas finie, rien ne s’affiche
+  if (loading)
+    return (
+      <div className="mt-20 flex justify-center">
+        <CircularProgress />
+      </div>
+    );
+  if (!authorized) return null;
 
   function addSection(newSection) {
     setSections((prev) => [...prev, newSection]);
