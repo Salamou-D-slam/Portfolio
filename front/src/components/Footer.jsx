@@ -46,7 +46,7 @@ function Footer() {
         </div>
 
         <p className="text-xs text-gray-400 mt-4 text-center pb-4">
-          Développeur Web FullStack — React • Python
+          Développeur Web FullStack — React • NodeJS
         </p>
       </div>
     </footer>

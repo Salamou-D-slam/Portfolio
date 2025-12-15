@@ -36,9 +36,6 @@ function Login() {
       } else {
         setEmail(data.email); // conserve l'email pour la vérification
         setStep(2); // passe à l'étape du code
-
-        setDisabled(true);
-        setTimeout(() => setDisabled(false), 60000);
       }
     } catch (err) {
       setError("loginError", {

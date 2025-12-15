@@ -23,7 +23,6 @@ function Contact() {
       const res = await fetch("http://localhost:8000/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        credentials: "include", // stockage du cookie
         body: JSON.stringify(form),
       });
       if (!res.ok) throw new Error("Erreur lors de l'envoi");
@@ -49,22 +48,6 @@ function Contact() {
       ...prev, // on garde les anciennes valeurs
       [name]: value, // on met à jour seulement celle changée
     }));
-  }
-
-  function handleSubmit(event) {
-    //   event.preventDefault();
-    //   alert(
-    //     `Merci ${form.nom} pour votre message ! Nous vous répondrons à ${form.email}`
-    //   );
-
-    // Réinitialiser le formulaire
-    setForm({
-      nom: "",
-      email: "",
-      title: "",
-      description: "",
-    });
-    setBox(!box);
   }
 
   return (

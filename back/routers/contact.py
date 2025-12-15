@@ -37,19 +37,28 @@ conf = ConnectionConfig(
 fm = FastMail(conf)
 
     
-async def send_mail_contact(nom: str, email: str, title: str, description: str):
+async def send_mail_contact(nom, email, title, description):
 
     message = MessageSchema(
         subject=f"{nom} - {title}",
-        recipients=[os.getenv("MAIL_RECEIVER")],  
-        body=f"Le nom de la personne: {nom}. \nLe mail de la personne{email}. \nLe titre du mail{title}.\n{description}",
-        subtype="plain"
+        recipients=[
+            os.getenv("MAIL_RECEIVER"),  
+            email                        
+        ],  
+        body=(
+            f"Le nom de la personne: {nom}\n"
+            f"Le mail de la personne: {email}\n"
+            f"Le titre du mail: {title}\n\n"
+            f"{description}"
+        ),       
+        subtype="plain",
+        reply_to=[email]
     )
     await fm.send_message(message)
     print("Mail envoyé ✅")
 
 @router.post("")
-async def contact(form:ContactForm, request):
+async def contact(form:ContactForm):
     await send_mail_contact( 
         nom=form.nom,
         email=form.email,

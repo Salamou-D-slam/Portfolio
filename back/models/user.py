@@ -8,5 +8,5 @@ class User(Base):
     id= Column (Integer, primary_key=True, index=True)
     email= Column (String, unique=True, index=True, nullable=False)
     name = Column (String, nullable=False)
-    code = Column (String, nullable=True)
+    code_hash = Column (String, nullable=True)
     code_expiration = Column(DateTime(timezone=True), nullable=True)

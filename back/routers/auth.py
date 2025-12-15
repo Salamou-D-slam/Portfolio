@@ -1,9 +1,10 @@
-from fastapi import APIRouter, HTTPException, Depends, Request
+from database.connection import SessionLocal
+from models.user import User
+from utils.hash_code import hash_code, verify_code
+from fastapi import APIRouter, HTTPException, Depends, Request, BackgroundTasks
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from sqlalchemy import select
-from database.connection import SessionLocal
-from models.user import User
 from fastapi_mail import FastMail, MessageSchema, ConnectionConfig
 import os
 from dotenv import load_dotenv
@@ -45,6 +46,7 @@ fm = FastMail(conf)
 # Génération du code 
 def generate_code():
     return str(random.randint(100000, 999999))
+
     
 async def send_mail(email: str, code: str):
 
@@ -60,22 +62,24 @@ async def send_mail(email: str, code: str):
 # ------------Routes-----------------------------
 class LoginForm(BaseModel):
     email: str
-    
+
 @router.post("/login")
-async def login(form: LoginForm,request: Request, db: Session= Depends(get_db)):
+async def login(form: LoginForm,request: Request, db: Session= Depends(get_db),):
     user = db.query(User).filter(User.email == form.email).first()
     if not user:
         raise HTTPException(status_code=400, detail="Utilisateur introuvable")
     
     code = generate_code()
-    user.code = code
-    user.code_expiration = datetime.now(timezone.utc) + timedelta(seconds=1)
+    user.code_hash = hash_code(code)
+    user.code_expiration = datetime.now(timezone.utc) + timedelta(seconds=10)
 
     db.add(user)
     db.commit()
     db.refresh(user)
 
     await send_mail(user.email, code)
+
+
     return {"message": "Code envoyé par mail"}
 
 class VerifyCodeForm(BaseModel):
@@ -88,23 +92,23 @@ async def verify_code(form: VerifyCodeForm, request: Request, db: Session = Depe
     if not user:
         raise HTTPException(status_code=400, detail="Utilisateur introuvable")
     
-    if user.code != form.code:
+    if not verify_code(form.code, user.code_hash):
         raise HTTPException(status_code=400, detail="Code incorrect")
     
-    if user.code_expiration.replace(tzinfo=None) < datetime.utcnow():
+    if  user.code_expiration <  datetime.now(timezone.utc):
+        user.code_hash = None
+        user.code_expiration = None
+        db.commit()
         raise HTTPException(status_code=400, detail="Code expiré")
     
     # Code correct et non expiré
-    user.code = None
+    user.code_hash = None
     user.code_expiration = None
     db.commit()
 
     request.session["user_id"]= user.id # Crée la session côté backend
     return {"message": "Connexion réussie", "user_id": user.id}
 
-
-    
-   
 
 @router.post("/logout")
 def logout(request: Request):
