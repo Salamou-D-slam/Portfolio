@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import TableProject from "../components/TableProject.jsx";
 import { ButtonForm } from "../components/Form";
+import { getAllProjets } from "../services/projectApi.js";
 
-function Projects({ sections }) {
+function Projects() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const data = await getAllProjets();
+        setProjects(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchProject();
+  }, []);
+
   return (
     <>
       <div className="container mx-auto p-6">
@@ -34,27 +49,30 @@ function Projects({ sections }) {
               </tr>
             </thead>
             <tbody className="text-center">
-              {sections && sections.length > 0 ? (
-                sections.map((sectionItem, index) => (
+              {projects && projects.length > 0 ? (
+                projects.map((project) => (
                   <TableProject
-                    key={index}
-                    nomProjet={sectionItem.projetNom}
-                    techno={sectionItem.techno}
-                    LienProjet={sectionItem.projetLien}
-                    projetLienNom={sectionItem.projetLienNom}
-                    dateProjetDebut={sectionItem.projetDateDebut}
-                    dateProjetFin={sectionItem.projetDateFin}
-                    GHProjet={sectionItem.GHProjet}
-                    PresentationProject={sectionItem.PresentationProject}
-                    techproject={sectionItem.techproject}
-                    VDOProjet={sectionItem.VDOProjet}
+                    key={project.id}
+                    id={project.id}
+                    nom_projet={project.nom_projet}
+                    techno={project.techno}
+                    lien_url={project.lien_url}
+                    lien_nom={project.lien_nom}
+                    lien_gh={project.lien_gh}
+                    lien_vdo={project.lien_vdo}
+                    date_debut={project.date_debut}
+                    date_fin={project.date_fin}
+                    presentation_projet={project.presentation_projet}
+                    technique_projet={project.technique_projet}
                     isAdmin={false}
                   />
                 ))
               ) : (
-                <th className="text-white text-center">
-                  Aucune section ajoutée pour le moment.
-                </th>
+                <tr>
+                  <td colSpan="5" className="text-white text-center">
+                    Aucune section ajoutée pour le moment.
+                  </td>
+                </tr>
               )}
             </tbody>
           </table>

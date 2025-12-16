@@ -27,14 +27,14 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profil" element={<Profil sections={profil} />} />
-            <Route path="/projets" element={<Projects sections={projects} />} />
+            <Route path="/projets" element={<Projects projects={projects} />} />
 
             <Route path="/admin" element={<Admin />} />
 
             <Route
               path="/admin/projectform"
               element={
-                <ProjectsAdmin sections={projects} setSections={setProjects} />
+                <ProjectsAdmin projects={projects} setProjects={setProjects} />
               }
             />
             <Route
@@ -44,7 +44,7 @@ function App() {
               }
             />
 
-            <Route path="/project/:nomProjet" element={<ProjectDetail />} />
+            <Route path="/projets/:id" element={<ProjectDetail />} />
           </Routes>
         </main>
 

@@ -4,17 +4,19 @@ import FormText from "../components/Form.jsx";
 import { FormTextrea, ButtonForm } from "../components/Form.jsx";
 
 function TableProject({
-  nomProjet,
+  nom_projet,
   techno,
-  LienProjet,
-  projetLienNom,
-  dateProjetDebut,
-  dateProjetFin,
 
-  GHProjet,
-  PresentationProject,
-  techproject,
-  VDOProjet,
+  lien_url,
+  lien_nom,
+  lien_gh,
+  lien_vdo,
+
+  date_debut,
+  date_fin,
+
+  presentation_projet,
+  technique_projet,
 
   isAdmin,
   onDelete,
@@ -23,16 +25,19 @@ function TableProject({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [tempDataProject, setTempDataProject] = useState({
-    projetNom: nomProjet,
+    nom_projet,
     techno,
-    projetLien: LienProjet,
-    projetLienNom: projetLienNom,
-    projetDateDebut: dateProjetDebut,
-    projetDateFin: dateProjetFin,
-    GHProjet,
-    PresentationProject,
-    techproject,
-    VDOProjet,
+
+    lien_url,
+    lien_nom,
+    lien_gh,
+    lien_vdo,
+
+    date_debut,
+    date_fin,
+
+    presentation_projet,
+    technique_projet,
   });
 
   function handleDelete() {
@@ -49,16 +54,19 @@ function TableProject({
 
   function handleCancel() {
     setTempDataProject({
-      projetNom: nomProjet,
+      nom_projet,
       techno,
-      projetLien: LienProjet,
-      projetLienNom: projetLienNom,
-      projetDateDebut: dateProjetDebut,
-      projetDateFin: dateProjetFin,
-      GHProjet,
-      PresentationProject,
-      techproject,
-      VDOProjet,
+
+      lien_url,
+      lien_nom,
+      lien_gh,
+      lien_vdo,
+
+      date_debut,
+      date_fin,
+
+      presentation_projet,
+      technique_projet,
     });
     setIsEditing(false);
   }
@@ -68,31 +76,34 @@ function TableProject({
       {/* section normale */}
       {!isEditing && (
         <tr>
-          <td className="tableProject">{nomProjet}</td>
+          <td className="tableProject">{nom_projet}</td>
           <td className="tableProject">{techno}</td>
           <td className="tableProject">
-            <a href={LienProjet} target="_blank" rel="noreferrer">
-              {projetLienNom}
+            <a href={lien_url} target="_blank" rel="noreferrer">
+              {lien_nom}
             </a>
           </td>
           <td className="tableProject">
-            {dateProjetDebut} - {dateProjetFin}
+            {date_debut} - {date_fin}
           </td>
           <td className="tableProject">
             <Link
-              to={`/project/${nomProjet}`}
+              to={`/projets/${id}`}
               state={{
                 projet: {
-                  nomProjet,
+                  nom_projet,
                   techno,
-                  LienProjet,
-                  projetLienNom,
-                  dateProjetDebut,
-                  dateProjetFin,
-                  GHProjet,
-                  PresentationProject,
-                  techproject,
-                  VDOProjet,
+
+                  lien_url,
+                  lien_nom,
+                  lien_gh,
+                  lien_vdo,
+
+                  date_debut,
+                  date_fin,
+
+                  presentation_projet,
+                  technique_projet,
                 },
               }}
             >
@@ -117,15 +128,19 @@ function TableProject({
                   type="button"
                   onClick={() => {
                     setTempDataProject({
-                      projetNom: nomProjet,
-                      projetLien: LienProjet,
-                      projetLienNom: projetLienNom,
-                      projetDateDebut: dateProjetDebut,
-                      projetDateFin: dateProjetFin,
-                      GHProjet,
-                      PresentationProject,
-                      techproject,
-                      VDOProjet,
+                      nom_projet,
+                      techno,
+
+                      lien_url,
+                      lien_nom,
+                      lien_gh,
+                      lien_vdo,
+
+                      date_debut,
+                      date_fin,
+
+                      presentation_projet,
+                      technique_projet,
                     });
                     setIsEditing(true);
                   }}
@@ -154,11 +169,11 @@ function TableProject({
 
                 <FormText
                   type="text"
-                  value={tempDataProject.projetNom}
+                  value={tempDataProject.nom_projet}
                   onChange={(e) =>
                     setTempDataProject({
                       ...tempDataProject,
-                      projetNom: e.target.value,
+                      nom_projet: e.target.value,
                     })
                   }
                 >
@@ -180,11 +195,11 @@ function TableProject({
 
                 <FormText
                   type="text"
-                  value={tempDataProject.projetLien}
+                  value={tempDataProject.lien_url}
                   onChange={(e) =>
                     setTempDataProject({
                       ...tempDataProject,
-                      projetLien: e.target.value,
+                      lien_url: e.target.value,
                     })
                   }
                 >
@@ -193,11 +208,11 @@ function TableProject({
 
                 <FormText
                   type="text"
-                  value={tempDataProject.projetLienNom}
+                  value={tempDataProject.lien_nom}
                   onChange={(e) =>
                     setTempDataProject({
                       ...tempDataProject,
-                      projetLienNom: e.target.value,
+                      lien_nom: e.target.value,
                     })
                   }
                 >
@@ -206,49 +221,54 @@ function TableProject({
 
                 <FormText
                   type="text"
-                  value={tempDataProject.GHProjet}
+                  value={tempDataProject.lien_gh}
                   onChange={(e) =>
                     setTempDataProject({
                       ...tempDataProject,
-                      GHProjet: e.target.value,
+                      lien_gh: e.target.value,
                     })
                   }
                 >
                   GitHub
                 </FormText>
 
-                <FormText
-                  type="date"
-                  value={tempDataProject.projetDateDebut}
-                  onChange={(e) =>
-                    setTempDataProject({
-                      ...tempDataProject,
-                      projetDateDebut: e.target.value,
-                    })
-                  }
-                >
-                  Date de début
-                </FormText>
+                <div className="bg-blue-900 w-120 p-4 mt-6 flex flex-row gap-10 justify-center">
+                  <div>
+                    <FormText
+                      type="date"
+                      value={tempDataProject.date_debut}
+                      onChange={(e) =>
+                        setTempDataProject({
+                          ...tempDataProject,
+                          date_debut: e.target.value,
+                        })
+                      }
+                    >
+                      Date de début
+                    </FormText>
+                  </div>
 
-                <FormText
-                  type="date"
-                  value={tempDataProject.projetDateFin}
-                  onChange={(e) =>
-                    setTempDataProject({
-                      ...tempDataProject,
-                      projetDateFin: e.target.value,
-                    })
-                  }
-                >
-                  Date de fin
-                </FormText>
-
+                  <div>
+                    <FormText
+                      type="date"
+                      value={tempDataProject.date_fin}
+                      onChange={(e) =>
+                        setTempDataProject({
+                          ...tempDataProject,
+                          date_fin: e.target.value,
+                        })
+                      }
+                    >
+                      Date de fin
+                    </FormText>
+                  </div>
+                </div>
                 <FormTextrea
-                  value={tempDataProject.PresentationProject}
+                  value={tempDataProject.presentation_projet}
                   onChange={(e) =>
                     setTempDataProject({
                       ...tempDataProject,
-                      PresentationProject: e.target.value,
+                      presentation_projet: e.target.value,
                     })
                   }
                 >
@@ -256,11 +276,11 @@ function TableProject({
                 </FormTextrea>
 
                 <FormTextrea
-                  value={tempDataProject.techproject}
+                  value={tempDataProject.technique_projet}
                   onChange={(e) =>
                     setTempDataProject({
                       ...tempDataProject,
-                      techproject: e.target.value,
+                      technique_projet: e.target.value,
                     })
                   }
                 >
@@ -269,11 +289,11 @@ function TableProject({
 
                 <FormText
                   type="text"
-                  value={tempDataProject.VDOProjet}
+                  value={tempDataProject.lien_vdo}
                   onChange={(e) =>
                     setTempDataProject({
                       ...tempDataProject,
-                      VDOProjet: e.target.value,
+                      lien_vdo: e.target.value,
                     })
                   }
                 >

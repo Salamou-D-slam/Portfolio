@@ -16,7 +16,7 @@ function Header() {
       <nav className="bg-transparent  outline-2 outline-offset-2 outline-blue-50 sm:w-160 max-sm:w-full mx-auto rounded-b-lg shadow-lg m-6">
         <div className="container mx-auto px-4 flex items-center justify-between p-4">
           <Link to="/" className="text-white text-2xl">
-            Salamou
+            Salamou JS
           </Link>
 
           <div className="flex items-center">

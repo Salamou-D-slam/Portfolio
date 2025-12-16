@@ -3,9 +3,15 @@ import { useNavigate } from "react-router-dom";
 import InputProject from "../components/InputProject.jsx";
 import TableProject from "../components/TableProject.jsx";
 import CircularProgress from "@mui/material/CircularProgress";
+import {
+  getAllProjets,
+  createProjet,
+  updateProjet,
+  deleteProjet,
+} from "../services/projectApi.js";
 
-function ProjectsAdmin({ sections, setSections }) {
-  //const [sections, setSections] = useState([]);
+function ProjectsAdmin({ projects, setProjects }) {
+  //const [projects, setProjects] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [authorized, setAuthorized] = useState(false);
@@ -33,6 +39,51 @@ function ProjectsAdmin({ sections, setSections }) {
     checkSession();
   }, [navigate]);
 
+  // Read les projets
+  const readProject = async () => {
+    try {
+      const data = await getAllProjets();
+      setProjects(data);
+    } catch (err) {
+      console.error("Erreur récupération projets :", err);
+    }
+  };
+  useEffect(() => {
+    readProject();
+  }, []);
+
+  // Create un projet
+  const addProject = async (newProject) => {
+    try {
+      const created = await createProjet(newProject);
+      setProjects((prev) => [...prev, created]);
+    } catch (err) {
+      console.error("Erreur création projet :", err);
+    }
+  };
+
+  // Update un projet
+  async function handleUpdate(id, updateData) {
+    try {
+      await updateProjet(id, updateData);
+      setProjects((prev) =>
+        prev.map((proj) => (proj.id === id ? { ...proj, ...updateData } : proj))
+      );
+    } catch (err) {
+      console.error("Erreur mise à jour :", err);
+    }
+  }
+
+  // Delete un projet
+  const handleDelete = async (id) => {
+    try {
+      await deleteProjet(id);
+      setProjects((prev) => prev.filter((proj) => proj.id !== id));
+    } catch (err) {
+      console.error("Erreur suppression :", err);
+    }
+  };
+
   // Tant que la vérification n’est pas finie, rien ne s’affiche
   if (loading)
     return (
@@ -41,22 +92,10 @@ function ProjectsAdmin({ sections, setSections }) {
       </div>
     );
   if (!authorized) return null;
-  function addSection(newSection) {
-    setSections((prev) => [...prev, newSection]);
-  }
 
-  function deleteProject(id) {
-    setSections((prev) => prev.filter((_, index) => index !== id));
-  }
-
-  function updateSection(id, updateData) {
-    setSections((prev) =>
-      prev.map((section, index) => (index === id ? updateData : section))
-    );
-  }
   return (
     <div className="container mx-auto p-6">
-      <InputProject onAdd={addSection} />
+      <InputProject onAdd={addProject} />
 
       <div className="mt-10">
         <div className="container mx-auto p-6 border-2 bg-gray-600/50 overflow-x-auto">
@@ -72,30 +111,32 @@ function ProjectsAdmin({ sections, setSections }) {
               </tr>
             </thead>
             <tbody className="text-center">
-              {sections.length > 0 ? (
-                sections.map((sectionItem, index) => (
+              {projects.length > 0 ? (
+                projects.map((project) => (
                   <TableProject
-                    key={index}
-                    id={index}
-                    nomProjet={sectionItem.projetNom}
-                    techno={sectionItem.techno}
-                    LienProjet={sectionItem.projetLien}
-                    projetLienNom={sectionItem.projetLienNom}
-                    dateProjetDebut={sectionItem.projetDateDebut}
-                    dateProjetFin={sectionItem.projetDateFin}
-                    GHProjet={sectionItem.GHProjet}
-                    PresentationProject={sectionItem.PresentationProject}
-                    techproject={sectionItem.techproject}
-                    VDOProjet={sectionItem.VDOProjet}
+                    key={project.id}
+                    id={project.id}
+                    nom_projet={project.nom_projet}
+                    techno={project.techno}
+                    lien_url={project.lien_url}
+                    lien_nom={project.lien_nom}
+                    lien_gh={project.lien_gh}
+                    lien_vdo={project.lien_vdo}
+                    date_debut={project.date_debut}
+                    date_fin={project.date_fin}
+                    presentation_projet={project.presentation_projet}
+                    technique_projet={project.technique_projet}
                     isAdmin={true}
-                    onDelete={deleteProject}
-                    onUpdate={updateSection}
+                    onUpdate={handleUpdate}
+                    onDelete={handleDelete}
                   />
                 ))
               ) : (
-                <th className="text-white text-center">
-                  Aucune section ajoutée pour le moment.
-                </th>
+                <tr>
+                  <td colSpan="6" className="text-center text-white">
+                    Aucune section ajoutée pour le moment.
+                  </td>
+                </tr>
               )}
             </tbody>
           </table>

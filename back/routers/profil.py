@@ -9,19 +9,25 @@ router = APIRouter(
     tags=["Profil"]
 )
 
-class ProfilForm(BaseModel):
+class ProfiCreate(BaseModel):
     nom_section: str
     description_section: str
 
+class ProfiResponse(ProfiCreate):
+    id: int
+
+    class Config:
+        from_attributes = True
+
 # Read toute les sections
-@router.get("")
+@router.get("",response_model=list[ProfiResponse])
 def read_section(db: Session = Depends(get_db)):
     profil = db.query(Profil).all()
     return profil
 
 # Create une section
-@router.post("", response_model=ProfilForm)
-def create_section(profil: ProfilForm, db: Session = Depends(get_db)):
+@router.post("", response_model=ProfiResponse)
+def create_section(profil: ProfiCreate, db: Session = Depends(get_db)):
     db_profil = Profil(**profil.dict())
     db.add(db_profil)
     db.commit()
@@ -29,8 +35,8 @@ def create_section(profil: ProfilForm, db: Session = Depends(get_db)):
     return db_profil
 
 # Update une section
-@router.put("/{profil_id}", response_model=ProfilForm)
-async def update_item(profil_id: int, profil_update: ProfilForm, db: Session = Depends(get_db)):
+@router.put("/{profil_id}", response_model=ProfiResponse)
+async def update_item(profil_id: int, profil_update: ProfiCreate, db: Session = Depends(get_db)):
     db_profil = db.query(Profil).filter(Profil.id == profil_id).first()
 
     if not db_profil:
