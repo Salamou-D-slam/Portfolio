@@ -10,9 +10,22 @@ import os
 from dotenv import load_dotenv
 import random
 from datetime import datetime, timedelta, timezone
+import smtplib
 
 
 load_dotenv()
+
+server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+server.login(os.getenv("MAIL_USERNAME"), os.getenv("MAIL_PASSWORD"))
+server.sendmail(
+    os.getenv("MAIL_FROM"),
+    "islamderrouiche@gmail.com",
+    "Subject: Test\n\nCeci est un test depuis render"
+)
+server.quit()
+print("Mail envoyé !")
+
+
 
 router = APIRouter(
     prefix="/auth",
@@ -23,14 +36,14 @@ router = APIRouter(
 #-------------Envoi de mail---------------
 
 conf = ConnectionConfig(
-    MAIL_USERNAME="apikey",
+    MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
     MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
     MAIL_FROM=os.getenv("MAIL_FROM"),
-    MAIL_PORT=587,
-    MAIL_SERVER="smtp-relay.sendinblue.com",
-    MAIL_STARTTLS = True,      # active le TLS (recommandé)
-    MAIL_SSL_TLS = False,       # on n’utilise pas SSL direct sur le port 465
-    USE_CREDENTIALS = True
+    MAIL_PORT=465,
+    MAIL_SERVER="smtp.gmail.com",
+    MAIL_STARTTLS=False, 
+    MAIL_SSL_TLS=True,
+    USE_CREDENTIALS=True
 )
 
 fm = FastMail(conf)

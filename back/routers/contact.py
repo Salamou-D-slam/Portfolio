@@ -24,14 +24,14 @@ class ContactForm(BaseModel):
     description: str
     
 conf = ConnectionConfig(
-    MAIL_USERNAME="apikey",
+    MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
     MAIL_PASSWORD=os.getenv("MAIL_PASSWORD"),
     MAIL_FROM=os.getenv("MAIL_FROM"),
-    MAIL_PORT=587,
-    MAIL_SERVER="smtp-relay.sendinblue.com",
-    MAIL_STARTTLS = True,      # active le TLS (recommandé)
-    MAIL_SSL_TLS = False,       # on n’utilise pas SSL direct sur le port 465
-    USE_CREDENTIALS = True
+    MAIL_PORT=465,
+    MAIL_SERVER="smtp.gmail.com",
+    MAIL_STARTTLS=False, 
+    MAIL_SSL_TLS=True,
+    USE_CREDENTIALS=True
 )
 
 fm = FastMail(conf)
