@@ -18,25 +18,27 @@ function Profi() {
   }, []);
 
   return (
-    <div className="container mx-auto p-6 border rounded whitespace-pre-wrap">
-      <h1 className="text-6xl text-salamou font-bold text-center text-white mb-6">
-        Mon Profil
-      </h1>
+    <>
+      <div className="container mx-auto p-6 border rounded whitespace-pre-wrap">
+        <h1 className="text-6xl text-salamou font-bold text-center text-white mb-6">
+          Mon Profil
+        </h1>
 
-      {sections && sections.length > 0 ? (
-        sections.map((section) => (
-          <SectionProfil
-            key={section.id}
-            id={section.id}
-            title={section.nom_section}
-            desc={section.description_section}
-            isAdmin={false}
-          />
-        ))
-      ) : (
-        <p className="text-white text-center">Aucune section disponible.</p>
-      )}
-    </div>
+        {sections && sections.length > 0 ? (
+          sections.map((section) => (
+            <SectionProfil
+              key={section.id}
+              id={section.id}
+              title={section.nom_section}
+              desc={section.description_section}
+              isAdmin={false}
+            />
+          ))
+        ) : (
+          <p className="text-white text-center">Aucune section disponible.</p>
+        )}
+      </div>
+    </>
   );
 }
 

@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import TableProject from "../components/TableProject.jsx";
 import { ButtonForm } from "../components/Form";
 import { getAllProjets } from "../services/projectApi.js";
+import ContactLink from "../components/ContactLink.jsx";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import InstagramIcon from "@mui/icons-material/Instagram";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
@@ -76,6 +80,38 @@ function Projects() {
               )}
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div className="sectionApply contactHoverDiv outlineApply text-white">
+        <h1 className="text-3xl font-bold mb-4 text-center">
+          Voir mes petits projet
+        </h1>
+
+        <div className="container flex flex-wrap mt-4 gap-6 p-4 rounded-lg justify-center ">
+          <ContactLink
+            href="https://github.com/Salamou-D-Islam"
+            target="_blank"
+            title="Mon GitHub"
+          >
+            <GitHubIcon sx={{ fontSize: 90 }} />
+          </ContactLink>
+
+          <ContactLink
+            href="https://www.youtube.com/@Islam-d19"
+            target="_blank"
+            title="Ma chaîne Youtube"
+          >
+            <YouTubeIcon sx={{ fontSize: 90 }} />
+          </ContactLink>
+
+          <ContactLink
+            href="https://www.instagram.com/salamou_js/"
+            target="_blank"
+            title="Mon Instagram"
+          >
+            <InstagramIcon sx={{ fontSize: 90 }} />
+          </ContactLink>
         </div>
       </div>
     </>

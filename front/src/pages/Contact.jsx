@@ -157,7 +157,7 @@ function Contact() {
             </ContactLink>
 
             <ContactLink
-              href="https://www.instagram.com/"
+              href="https://www.instagram.com/salamou_js/"
               target="_blank"
               title="Mon Instagram"
             >

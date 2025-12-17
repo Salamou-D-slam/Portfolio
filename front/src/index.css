@@ -91,13 +91,13 @@ body {
 
 /*-----------------------------CONTACT-------------------------------------------------------------*/
 .sectionContact {
-  @apply text-white  w-full h-150 max-lg:h-350 flex flex-row max-lg:flex-wrap items-center justify-center  mb-20 mt-20  max-md:-mb-20 max-md:-mt-20 max-md:p-6;
+  @apply text-white  w-full h-150 max-lg:h-350 flex flex-row max-lg:flex-wrap items-center justify-center  mb-20 mt-20  max-md:-mb-20 max-md:-mt-0 max-md:p-6;
 }
 
 .divForm {
-  @apply bg-transparent hover:bg-blue-900 opacity-50 hover:opacity-100  w-230 h-150 p-6  flex items-center justify-center mr-4 max-md:mr-0 max-md:mb-0;
+  @apply bg-transparent hover:bg-blue-900 opacity-50 hover:opacity-100  w-230 h-150 max-md:h-170 p-6  flex items-center justify-center mr-4 max-md:mr-0 max-md:mb-0;
 }
 
 .divSocials {
-  @apply container bg-transparent hover:bg-indigo-800 opacity-50 hover:opacity-100 w-230 h-150  max-md:h-60 max-sm:h-100  max-md:-mt-80 p-6 flex flex-col items-center justify-center;
+  @apply container bg-transparent hover:bg-indigo-800 opacity-50 hover:opacity-100 w-230 h-150  max-md:h-60 max-sm:h-100  max-md:-mt-40 p-6 flex flex-col items-center justify-center;
 }
