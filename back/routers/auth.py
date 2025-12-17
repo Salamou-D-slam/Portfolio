@@ -24,8 +24,8 @@ router = APIRouter(
 
 conf = ConnectionConfig(
     MAIL_USERNAME="apikey",
-    SENDGRID_API_KEY=os.getenv("SENDGRID_API_KEY"),
-    FROM_EMAIL=os.getenv("FROM_EMAIL"),
+    MAIL_PASSWORD=os.getenv("SENDGRID_API_KEY"),
+    MAIL_FROM=os.getenv("MAIL_FROM"),
     MAIL_PORT=587,
     MAIL_SERVER="smtp.sendgrid.net",
     MAIL_STARTTLS = True,      # active le TLS (recommandé)
