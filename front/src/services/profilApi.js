@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000/profil";
+const API_URL = "https://portfolio-ufox.onrender.com/profil";
 
 export const getAllSections = async () => {
   const res = await fetch(API_URL);

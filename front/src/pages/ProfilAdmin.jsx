@@ -18,10 +18,13 @@ function ProfilAdmin({ sections, setSections }) {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch("http://localhost:8000/admin/profilform", {
-          method: "GET",
-          credentials: "include",
-        });
+        const res = await fetch(
+          "https://portfolio-ufox.onrender.com/admin/profilform",
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
 
         if (res.status === 401) {
           navigate("/login"); // pas connecté donc redirection

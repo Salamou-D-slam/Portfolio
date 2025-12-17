@@ -20,12 +20,15 @@ function Login() {
   // Étape 1 : Envoi du code
   const sendCode = async (data) => {
     try {
-      const res = await fetch("http://localhost:8000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // stockage du cookie
-        body: JSON.stringify({ email: data.email }), // Data contient le email
-      });
+      const res = await fetch(
+        "https://portfolio-ufox.onrender.com/auth/login",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // stockage du cookie
+          body: JSON.stringify({ email: data.email }), // Data contient le email
+        }
+      );
 
       const json = await res.json();
       if (!res.ok) {
@@ -48,12 +51,15 @@ function Login() {
   // Étape 2 : Vérification du code
   const verifyCode = async (data) => {
     try {
-      const res = await fetch("http://localhost:8000/auth/verif-code", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include", // stockage du cookie
-        body: JSON.stringify({ email, code: data.code }), // Data contient le email et le code
-      });
+      const res = await fetch(
+        "https://portfolio-ufox.onrender.com/auth/verif-code",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include", // stockage du cookie
+          body: JSON.stringify({ email, code: data.code }), // Data contient le email et le code
+        }
+      );
 
       const json = await res.json();
       if (!res.ok) {

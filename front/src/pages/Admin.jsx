@@ -12,7 +12,7 @@ function Admin() {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        const res = await fetch("http://localhost:8000/admin", {
+        const res = await fetch("https://portfolio-ufox.onrender.com/admin", {
           method: "GET",
           credentials: "include",
         });
@@ -43,7 +43,7 @@ function Admin() {
 
   const handlLogout = async (data) => {
     try {
-      await fetch("http://localhost:8000/auth/logout", {
+      await fetch("https://portfolio-ufox.onrender.com/auth/logout", {
         method: "POST",
         credentials: "include",
       });
