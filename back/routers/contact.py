@@ -25,8 +25,8 @@ class ContactForm(BaseModel):
     
 conf = ConnectionConfig(
     MAIL_USERNAME="apikey",
-    MAIL_PASSWORD=os.getenv("SENDGRID_API_KEY"),
-    MAIL_FROM=os.getenv("MAIL_FROM"),
+    SENDGRID_API_KEY=os.getenv("SENDGRID_API_KEY"),
+    FROM_EMAIL=os.getenv("FROM_EMAIL"),
     MAIL_PORT=587,
     MAIL_SERVER="smtp.sendgrid.net",
     MAIL_STARTTLS = True,      # active le TLS (recommandé)
