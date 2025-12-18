@@ -18,9 +18,9 @@ def admin(user_id: int = Depends(get_current_user)):
     return {"message": f"Bienvenue admin {user_id}"}
 
 @router.get("/profilform")
-def admin(user_id: int = Depends(get_current_user)):
+def admin_profil(user_id: int = Depends(get_current_user)):
     return {"message": f"Bienvenue admin profil form {user_id}"}
 
 @router.get("/projectform")
-def admin(user_id: int = Depends(get_current_user)):
+def admin_project(user_id: int = Depends(get_current_user)):
     return {"message": f"Bienvenue admin project form {user_id}"}
