@@ -14,6 +14,7 @@ app = FastAPI()
 app.add_middleware(
     SessionMiddleware, 
     secret_key=os.getenv("SECRET_KEY"),
+    https_only=False,       # cookie envoyé seulement en HTTPS
     same_site="lax",        # protection CSRF
     max_age=60 * 60,        # 1 heure
     )
