@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Photo from "../assets/Photo.jpg";
+import Photo from "../assets/PP.png";
 import ButtonHome from "../components/ButtonLink.jsx";
 
 function Home() {

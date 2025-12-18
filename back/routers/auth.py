@@ -80,7 +80,7 @@ class VerifyCodeForm(BaseModel):
     code: str   
 
 @router.post("/verif-code")
-async def verify_code(form: VerifyCodeForm, request: Request, db: Session = Depends(get_db)):
+async def verify_code_endpoint(form: VerifyCodeForm, request: Request, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == form.email).first()
     if not user:
         raise HTTPException(status_code=400, detail="Utilisateur introuvable")
