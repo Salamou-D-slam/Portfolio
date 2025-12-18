@@ -15,7 +15,7 @@ app.add_middleware(
     SessionMiddleware, 
     secret_key=os.getenv("SECRET_KEY"),
     https_only=True,       # cookie envoyé seulement en HTTPS
-    same_site="lax",        # protection CSRF
+    same_site="none",        # protection CSRF
     max_age=60 * 60,        # 1 heure
     )
 Base.metadata.create_all(bind=engine)
