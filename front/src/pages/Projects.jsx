@@ -28,8 +28,9 @@ function Projects() {
 
   if (loading)
     return (
-      <div className="mt-20 flex justify-center">
+      <div className="mt-20 flex flex-col items-center">
         <CircularProgress />
+        <span>Chargement en cours… Veuillez patienter</span>
       </div>
     );
 
