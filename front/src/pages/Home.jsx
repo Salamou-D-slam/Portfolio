@@ -22,6 +22,11 @@ function Home() {
             <h2 className="subtitleCls">DEVELOPPEUR WEB FULLSTACK</h2>
             <span className="nameSpan">REACT • NODE</span>
           </div>
+          <span className="text-white mx-auto mt-8 text-center">
+            Je conçois des applications web modernes, performantes et
+            maintenables, du front au back. <br />
+            Disponible pour missions freelance et opportunités junior.
+          </span>
 
           <div className="buttonLink">
             {!isSmall && (

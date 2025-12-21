@@ -6,9 +6,11 @@ import ContactLink from "../components/ContactLink.jsx";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Projects() {
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProject = async () => {
@@ -17,10 +19,19 @@ function Projects() {
         setProjects(data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchProject();
   }, []);
+
+  if (loading)
+    return (
+      <div className="mt-20 flex justify-center">
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <>

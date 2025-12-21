@@ -51,7 +51,7 @@ function ProjectDetail() {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
-            className="mx-auto"
+            className="mx-auto max-md:w-full"
           ></iframe>
         }
         className=" mb-20!"

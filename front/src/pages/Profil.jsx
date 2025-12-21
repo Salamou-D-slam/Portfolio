@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import SectionProfil from "../components/SectionProfil.jsx";
 import { getAllSections } from "../services/profilApi.js";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function Profi() {
   const [sections, setSections] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchSections = async () => {
@@ -12,10 +14,19 @@ function Profi() {
         setSections(data);
       } catch (err) {
         console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchSections();
   }, []);
+
+  if (loading)
+    return (
+      <div className="mt-20 flex justify-center">
+        <CircularProgress />
+      </div>
+    );
 
   return (
     <>

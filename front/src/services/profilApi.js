@@ -1,5 +1,4 @@
 const API_URL = "https://islam-backend.fly.dev/profil";
-//const API_URL = "http://localhost:5173/profil";
 
 export const getAllSections = async () => {
   const res = await fetch(API_URL, {
