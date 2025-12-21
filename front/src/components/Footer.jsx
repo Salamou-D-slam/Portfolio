@@ -25,13 +25,6 @@ function Footer() {
             <LinkedInIcon />
           </ContactLink>
 
-          <ContactLink
-            href="https://www.malt.fr/profile/islamderrouiche1 "
-            target="_blank"
-          >
-            Malte
-          </ContactLink>
-
           <Link
             to="/contact"
             className="text-white text-2xl hover:text-indigo-400"
@@ -41,7 +34,7 @@ function Footer() {
         </div>
         <div className="container mx-auto px-4 py-6 text-center">
           <p className="text-white">
-            &copy; {year} Salamou. Tous droits réservés.
+            &copy; {year} Salamou JS. Tous droits réservés.
           </p>
         </div>
 
