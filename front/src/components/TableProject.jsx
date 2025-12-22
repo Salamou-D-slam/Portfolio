@@ -71,6 +71,11 @@ function TableProject({
     setIsEditing(false);
   }
 
+  const formatDateForInput = (dateString) => {
+    if (!dateString) return "";
+    return dateString.split("T")[0]; // garde seulement YYYY-MM-DD
+  };
+
   return (
     <>
       {/* section normale */}
@@ -236,7 +241,7 @@ function TableProject({
                   <div>
                     <FormText
                       type="date"
-                      value={tempDataProject.date_debut}
+                      value={formatDateForInput(tempDataProject.date_debut)}
                       onChange={(e) =>
                         setTempDataProject({
                           ...tempDataProject,
@@ -251,7 +256,7 @@ function TableProject({
                   <div>
                     <FormText
                       type="date"
-                      value={tempDataProject.date_fin}
+                      value={formatDateForInput(tempDataProject.date_fin)}
                       onChange={(e) =>
                         setTempDataProject({
                           ...tempDataProject,

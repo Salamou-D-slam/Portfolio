@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, Text
 from database.connection import Base
-from datetime import datetime, timedelta
+from datetime import datetime
 
 class Profil(Base):
     __tablename__= "profil"
@@ -9,3 +9,8 @@ class Profil(Base):
     nom_section = Column (String, unique=False, index=True, nullable=True)
     description_section = Column (Text, nullable=True)
 
+created_at = Column(
+    DateTime(timezone=True),
+    default=datetime.utcnow,
+    nullable=False
+)

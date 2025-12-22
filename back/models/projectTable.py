@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, Text
 from database.connection import Base
+from datetime import datetime
 
 class Project(Base):
     __tablename__= "project"
@@ -21,3 +22,8 @@ class Project(Base):
     technique_projet = Column(Text, nullable=True)
 
 
+    created_at = Column(
+        DateTime(timezone=True),
+        default=datetime.utcnow,
+        nullable=False
+    )

@@ -32,6 +32,21 @@ class ProjectCreate(BaseModel):
     presentation_projet: Optional[str] = None
     technique_projet: Optional[str] = None
 
+class ProjectUpdate(BaseModel):
+    nom_projet: str | None = None
+    techno: str | None = None
+
+    lien_url: str | None = None
+    lien_nom: str | None = None
+    lien_gh: str | None = None
+    lien_vdo: str | None = None
+
+    date_debut: datetime | None = None
+    date_fin: datetime | None = None
+
+    presentation_projet: str | None = None
+    technique_projet: str | None = None
+
 class ProjectResponse(ProjectCreate):
     id: int
 
@@ -40,13 +55,13 @@ class ProjectResponse(ProjectCreate):
 
 # Read tout les projet
 @router.get("", response_model=list[ProjectResponse])
-def read_section(db: Session = Depends(get_db)):
-    projects = db.query(Project).all()
+def read_projects(db: Session = Depends(get_db)):
+    projects = (db.query(Project).order_by(Project.created_at.desc()).all())    
     return projects
 
 # Create un projet
 @router.post("", response_model=ProjectResponse)
-def create_section(project: ProjectCreate, db: Session = Depends(get_db)):
+def create_project(project: ProjectCreate, db: Session = Depends(get_db)):
     db_project = Project(**project.model_dump())
     db.add(db_project)
     db.commit()
@@ -55,14 +70,14 @@ def create_section(project: ProjectCreate, db: Session = Depends(get_db)):
 
 # Update un projet
 @router.put("/{project_id}", response_model=ProjectResponse)
-def update_item(project_id: int, project_update: ProjectCreate, db: Session = Depends(get_db)):
+def update_project(project_id: int, project_update: ProjectUpdate, db: Session = Depends(get_db)):
     db_project = db.query(Project).filter(Project.id == project_id).first()
 
     if not db_project:
         raise HTTPException(status_code=404, detail="Projet non trouvé")
     
     # Maj des champs
-    for field, value in project_update.model_dump().items():
+    for field, value in project_update.model_dump( exclude_unset=True, exclude_none=True).items():
         setattr(db_project, field, value)
 
     db.commit()
@@ -71,18 +86,18 @@ def update_item(project_id: int, project_update: ProjectCreate, db: Session = De
 
 # Delete un projet
 @router.delete("/{project_id}")
-def delete_item(project_id: int, db: Session = Depends(get_db)):
+def delete_project(project_id: int, db: Session = Depends(get_db)):
     db_project = db.query(Project).filter(Project.id == project_id).first()
     if not db_project:
         raise HTTPException(status_code=404, detail="Projet non trouvé")
     db.delete(db_project)
     db.commit()
-    return {"message": "Section supprimée avec succès"}
+    return {"message": "Projet supprimée avec succès"}
 
 
 # Read un projet
 @router.get("/{project_id}", response_model=ProjectResponse)
-def read_section(project_id: int, db: Session = Depends(get_db)):
+def read_project(project_id: int, db: Session = Depends(get_db)):
     projects = db.query(Project).filter(Project.id ==project_id).first()
     if not projects:
         raise HTTPException(status_code=404, detail="Projet non trouvé")
