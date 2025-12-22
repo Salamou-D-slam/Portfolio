@@ -9,8 +9,8 @@ class Profil(Base):
     nom_section = Column (String, unique=False, index=True, nullable=True)
     description_section = Column (Text, nullable=True)
 
-created_at = Column(
-    DateTime(timezone=True),
-    default=datetime.utcnow,
-    nullable=False
-)
+    created_at = Column(
+        DateTime(timezone=True),
+        default=datetime.utcnow,
+        nullable=False
+    )
